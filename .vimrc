@@ -214,6 +214,8 @@ let g:vim_jsx_pretty_colorful_config = 1
 " AIRLINE
 "
 let g:airline_theme='onedark'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " FERN
 "
