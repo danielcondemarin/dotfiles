@@ -1,0 +1,15 @@
+{
+    "tsserver.log": "normal",
+    "coc.preferences.formatOnSaveFiletypes": [
+      "javascript",
+      "rust",
+      "typescript",
+      "typescriptreact",
+      "javascriptreact",
+      "css",
+      "markdown"
+    ],
+    "snippets.extends": {
+      "typescriptreact": ["typescript"]
+    }
+}
