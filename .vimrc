@@ -12,9 +12,6 @@ set hlsearch
 set encoding=UTF-8
 set guifont=FuraCode\ Nerd\ Font:h17
 set cursorline
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
 set foldmethod=syntax 
 set foldlevelstart=99
 filetype plugin on
