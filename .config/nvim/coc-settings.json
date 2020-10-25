@@ -10,6 +10,6 @@
       "markdown"
     ],
     "snippets.extends": {
-      "typescriptreact": ["typescript"]
+      "typescriptreact": ["typescript", "javascript"]
     }
 }
