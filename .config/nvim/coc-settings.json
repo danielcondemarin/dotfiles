@@ -11,14 +11,5 @@
     ],
     "snippets.extends": {
       "typescriptreact": ["typescript", "javascript"]
-    },
-    "html.autoClosingTags": true,
-    "html.filetypes": [
-      "html",
-      "handlebars",
-      "htmldjango",
-      "blade",
-      "typescriptreact",
-      "javascriptreact"
-    ]
+    }
 }
