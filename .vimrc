@@ -49,11 +49,13 @@ nnoremap <Leader>R
   \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 nnoremap <silent> <c-p> :Files<CR>
 nnoremap <silent> <c-s> :Buffers<CR>
+
 " disable arrow keys
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+
 " autocomplete braces
 inoremap " ""<left>
 inoremap ' ''<left>
@@ -62,23 +64,32 @@ inoremap [ []<left>
 inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
+
 " clipboard copy / paste
 noremap <Leader>y "+y
 noremap <Leader>p "+p
+
 " visually select entire buffer
 nnoremap vy ggVG
+
 " save buffer
 nnoremap zz :update<cr>
+
 " toggle search highlight
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
 " vim fugitive
 nnoremap <leader>gh :diffget //2<CR>
 nnoremap <leader>gl :diffget //3<CR>
+nnoremap <leader>gs :20GStatus<CR>
+
 " tabs
 map <Leader>t :tabnew<CR>
+
 " signify
 nnoremap <leader>gp :SignifyHunkDiff<cr>
 nnoremap <leader>gu :SignifyHunkUndo<cr>
+
 " coc
 nmap <leader>rn <Plug>(coc-rename)
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -92,8 +103,8 @@ nmap <silent> gr <Plug>(coc-references)
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+
 " fern
-" nerdtree
 map <leader>n :Fern . -drawer -toggle -reveal=% -width=40<cr>
 function! s:init_fern() abort
   " Use 'select' instead of 'edit' for default 'open' action
@@ -103,6 +114,7 @@ function! s:init_fern() abort
   nmap <buffer> D <Plug>(fern-action-new-dir) 
   nmap <buffer> dd <Plug>(fern-action-trash) 
 endfunction
+
 augroup fern-custom
   autocmd! *
   autocmd FileType fern call s:init_fern()
@@ -118,18 +130,24 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
 " coc-snippets
 "
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
+ 
 " Use <C-j> for select text for visual placeholder of snippet.
 vmap <C-j> <Plug>(coc-snippets-select)
+
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
 let g:coc_snippet_next = '<c-j>'
+
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
 let g:coc_snippet_prev = '<c-k>'
+
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
+
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
 
@@ -286,12 +304,13 @@ if (has("autocmd"))
   let s:grey = s:colors.visual_grey
   let s:yellow = s:colors.yellow
   let s:blue = s:colors.blue
+
   augroup colorextend
     autocmd!
-    autocmd ColorScheme * call onedark#extend_highlight("DiffAdd", { "bg": s:grey, "fg": s:green })
-    autocmd ColorScheme * call onedark#extend_highlight("DiffChange", { "bg": s:grey, "fg": s:yellow, "cterm": "NONE", "gui": "NONE" })
-    autocmd ColorScheme * call onedark#extend_highlight("DiffDelete", { "bg": s:grey, "fg": s:red })
-    autocmd ColorScheme * call onedark#extend_highlight("DiffText", { "bg": s:grey, "fg": s:blue })
+    autocmd ColorScheme onedark call onedark#extend_highlight("DiffAdd", { "bg": s:grey, "fg": s:green }) 
+    autocmd ColorScheme onedark call onedark#extend_highlight("DiffChange", { "bg": s:grey, "fg": s:yellow, "cterm": "NONE", "gui": "NONE" }) 
+    autocmd ColorScheme onedark call onedark#extend_highlight("DiffDelete", { "bg": s:grey, "fg": s:red }) 
+    autocmd ColorScheme onedark call onedark#extend_highlight("DiffText", { "bg": s:grey, "fg": s:blue }) 
   augroup END
 endif
 
