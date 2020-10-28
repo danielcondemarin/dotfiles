@@ -277,10 +277,28 @@ let g:closetag_close_shortcut = '<leader>>'
 "
 let g:fern#renderer = "nerdfont"
 
+" Override vimdiff colors so is less intense than onedark defaults
+"
+if (has("autocmd"))
+  let s:colors = onedark#GetColors()
+  let s:red = s:colors.red
+  let s:green = s:colors.green
+  let s:grey = s:colors.visual_grey
+  let s:yellow = s:colors.yellow
+  let s:blue = s:colors.blue
+  augroup colorextend
+    autocmd!
+    autocmd ColorScheme * call onedark#extend_highlight("DiffAdd", { "bg": s:grey, "fg": s:green })
+    autocmd ColorScheme * call onedark#extend_highlight("DiffChange", { "bg": s:grey, "fg": s:yellow, "cterm": "NONE", "gui": "NONE" })
+    autocmd ColorScheme * call onedark#extend_highlight("DiffDelete", { "bg": s:grey, "fg": s:red })
+    autocmd ColorScheme * call onedark#extend_highlight("DiffText", { "bg": s:grey, "fg": s:blue })
+  augroup END
+endif
+
 " THEME
 "
-set background=dark
 colorscheme onedark
+
 " Enable true colours in Neovim
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
