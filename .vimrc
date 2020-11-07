@@ -5,6 +5,7 @@ set backspace=indent,eol,start
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
+set autoindent
 set smartindent
 set expandtab
 set relativenumber
@@ -92,13 +93,13 @@ nnoremap <leader>gu :SignifyHunkUndo<cr>
 
 " coc
 nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>qf <Plug>(coc-fix-current)
 autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 inoremap <silent><expr> <c-space> coc#refresh()
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
@@ -184,6 +185,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-rhubarb'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'alvan/vim-closetag'
+Plug 'cespare/vim-toml'
 
 call plug#end()
 
@@ -294,25 +296,6 @@ let g:closetag_close_shortcut = '<leader>>'
 " FERN
 "
 let g:fern#renderer = "nerdfont"
-
-" Override vimdiff colors so is less intense than onedark defaults
-"
-if (has("autocmd"))
-  let s:colors = onedark#GetColors()
-  let s:red = s:colors.red
-  let s:green = s:colors.green
-  let s:grey = s:colors.visual_grey
-  let s:yellow = s:colors.yellow
-  let s:blue = s:colors.blue
-
-  augroup colorextend
-    autocmd!
-    autocmd ColorScheme onedark call onedark#extend_highlight("DiffAdd", { "bg": s:grey, "fg": s:green }) 
-    autocmd ColorScheme onedark call onedark#extend_highlight("DiffChange", { "bg": s:grey, "fg": s:yellow, "cterm": "NONE", "gui": "NONE" }) 
-    autocmd ColorScheme onedark call onedark#extend_highlight("DiffDelete", { "bg": s:grey, "fg": s:red }) 
-    autocmd ColorScheme onedark call onedark#extend_highlight("DiffText", { "bg": s:grey, "fg": s:blue }) 
-  augroup END
-endif
 
 " THEME
 "
