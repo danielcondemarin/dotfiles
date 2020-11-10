@@ -161,10 +161,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mileszs/ack.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
-Plug 'maxmellon/vim-jsx-pretty'
 Plug 'tpope/vim-surround'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'pangloss/vim-javascript'
 Plug 'preservim/nerdcommenter'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'tpope/vim-fugitive'
@@ -186,8 +183,13 @@ Plug 'tpope/vim-rhubarb'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'alvan/vim-closetag'
 Plug 'cespare/vim-toml'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 call plug#end()
+
+" Treesitter
+"
+lua require'nvim-treesitter.configs'.setup { ensure_installed = "maintained", highlight = { enable = true } }
 
 " SEARCHING TEXT (AG)
 "
@@ -291,7 +293,7 @@ let g:closetag_shortcut = '>'
 
 " Add > at current position without closing the current tag, default is ''
 "
-let g:closetag_close_shortcut = '<leader>>'
+"let g:closetag_close_shortcut = '<leader>>'
 
 " FERN
 "
