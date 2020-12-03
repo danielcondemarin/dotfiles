@@ -6,8 +6,7 @@
       "typescript",
       "typescriptreact",
       "javascriptreact",
-      "css",
-      "markdown"
+      "css"
     ],
     "snippets.extends": {
       "typescriptreact": ["typescript", "javascript"]
