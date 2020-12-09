@@ -30,19 +30,19 @@ cursor:
   style: Block
   unfocused_hollow: true
 
-# Colors (One Dark)
+ #Colors (One Dark)
 colors:
-  # Default colors
+   #Default colors
   primary:
     foreground: '0xabb2bf'
     background: '0x282c34'
 
-  # Cursor colors
+   #Cursor colors
   cursor:
     text: '0x5c6370'
     cursor: '0xabb2bf'
 
-  # Normal colors
+   #Normal colors
   normal:
     black:   '0x5c6370'
     red:     '0xe06c75'
@@ -53,7 +53,7 @@ colors:
     cyan:    '0x56b6c2'
     white:   '0xabb2bf'
 
-  # Bright colors
+   #Bright colors
   bright:
     black:   '0x4b5263'
     red:     '0xbe5046'
