@@ -51,6 +51,10 @@ nnoremap <Leader>R
 nnoremap <silent> <c-p> :Files<CR>
 nnoremap <silent> <c-s> :Buffers<CR>
 
+" quickfix list
+noremap [q :cprev <CR>
+noremap ]q :cnext <CR>
+
 " disable arrow keys
 noremap <Up> <Nop>
 noremap <Down> <Nop>
@@ -170,7 +174,9 @@ Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'lambdalisue/glyph-palette.vim'
 Plug 'antoinemadec/FixCursorHold.nvim'
-Plug 'vimwiki/vimwiki'
+"Plug 'vimwiki/vimwiki'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-rhubarb'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'alvan/vim-closetag'
