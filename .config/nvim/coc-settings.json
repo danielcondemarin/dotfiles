@@ -10,5 +10,9 @@
     ],
     "snippets.extends": {
       "typescriptreact": ["typescript", "javascript"]
+    },
+    "go.checkForUpdates": "install",
+    "go.goplsOptions": {
+      "gofumpt": true
     }
 }

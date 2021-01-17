@@ -20,6 +20,8 @@ syntax on
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=100
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
 " REMAP LEADER TO SPACE KEY 
 "
@@ -100,6 +102,19 @@ nmap <silent> gr <Plug>(coc-references)
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" go
+autocmd FileType go nmap <leader>gtj :CocCommand go.tags.add json<cr>
+autocmd FileType go nmap <leader>gty :CocCommand go.tags.add yaml<cr>
+autocmd FileType go nmap <leader>gtx :CocCommand go.tags.clear<cr>
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+" disable lsp vim-go and other feats
+let g:go_fmt_fail_silently=1
+let g:go_gopls_enabled=0
+let g:go_diagnostics_enabled=0
+let g:go_def_mapping_enabled=0
+let g:go_def_mapping_enabled=0
+let g:go_doc_keywordprg_enabled=0
 
 " fern
 map <leader>n :Fern . -drawer -toggle -reveal=% -width=40<cr>
@@ -182,6 +197,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'alvan/vim-closetag'
 Plug 'cespare/vim-toml'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'fatih/vim-go'
 
 call plug#end()
 
