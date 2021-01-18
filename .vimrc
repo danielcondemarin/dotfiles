@@ -143,6 +143,12 @@ function! s:show_documentation()
   endif
 endfunction
 
+" Dockerfile
+augroup dockerfile
+  au!
+  autocmd BufNewFile,BufRead Dockerfile.* set syntax=dockerfile
+augroup END
+
 " coc-snippets
 "
 " Use <C-l> for trigger snippet expand.
