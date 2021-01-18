@@ -22,6 +22,8 @@ syntax on
 set updatetime=100
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+set showbreak=↪\ 
 
 " REMAP LEADER TO SPACE KEY 
 "

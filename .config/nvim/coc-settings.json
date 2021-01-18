@@ -14,5 +14,6 @@
     "go.checkForUpdates": "install",
     "go.goplsOptions": {
       "gofumpt": true
-    }
+    },
+    "snippets.ultisnips.directories": [ "gosnippets/UltiSnips" ]
 }
