@@ -186,7 +186,6 @@ Plug 'preservim/nerdcommenter'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'tpope/vim-fugitive'
 Plug 'joaohkfaria/vim-jest-snippets'
-Plug 'jehuipark/github-co-author-vim-plugin'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/fzf'
@@ -258,7 +257,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Git coauthors autocomplete
 "
-let g:github_co_author_list_path = '~/.vim/github-co-author-list'
+command! -nargs=+ Gca :r!git log -n300 --pretty=format:"\%an <\%ae>" | grep -i '<args>' | head -1 | xargs echo "Co-authored-by:"
 
 " VIM JSX
 "
