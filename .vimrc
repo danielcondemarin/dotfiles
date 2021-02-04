@@ -83,7 +83,7 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <leader>gh :diffget //2<CR>
 nnoremap <leader>gl :diffget //3<CR>
 nnoremap <leader>gs :20GStatus<CR>
-command Gpp :Gpull | :Gpush<CR>
+command Gpp :Gpull | Gpush<CR>
 
 " tabs
 map <Leader>t :tabnew<CR>
@@ -213,6 +213,10 @@ call plug#end()
 "
 lua require'nvim-treesitter.configs'.setup { ensure_installed = "maintained", highlight = { enable = true } }
 
+" Fugitive
+" temporary until lerna (or maybe lint-staged fixes this issue, see https://github.com/tpope/vim-fugitive/issues/1446)
+let g:fugitive_pty = 0
+
 " SEARCHING TEXT (AG)
 "
 "
@@ -258,10 +262,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Git coauthors autocomplete
 "
 command! -nargs=+ Gca :r!git log -n300 --pretty=format:"\%an <\%ae>" | grep -i '<args>' | head -1 | xargs echo "Co-authored-by:"
-
-" VIM JSX
-"
-let g:vim_jsx_pretty_colorful_config = 1
 
 " AIRLINE
 "
