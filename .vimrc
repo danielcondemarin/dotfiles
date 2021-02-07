@@ -182,7 +182,6 @@ Plug 'mileszs/ack.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-surround'
-Plug 'preservim/nerdcommenter'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'tpope/vim-fugitive'
 Plug 'joaohkfaria/vim-jest-snippets'
@@ -206,6 +205,7 @@ Plug 'alvan/vim-closetag'
 Plug 'cespare/vim-toml'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'fatih/vim-go'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
