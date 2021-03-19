@@ -261,7 +261,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Git coauthors autocomplete
 "
-command! -nargs=+ Gca :r!git log -n300 --pretty=format:"\%an <\%ae>" | grep -i '<args>' | head -1 | xargs echo "Co-authored-by:"
+command! -nargs=+ Gca :r!git log -n400 --pretty=format:"\%an <\%ae>" | grep -i '<args>' | head -1 | xargs echo "Co-authored-by:"
 
 " AIRLINE
 "

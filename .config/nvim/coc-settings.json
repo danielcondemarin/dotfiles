@@ -13,7 +13,8 @@
     },
     "go.checkForUpdates": "install",
     "go.goplsOptions": {
-      "gofumpt": true
+      "gofumpt": true,
+      "verboseOutput": true
     },
     "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"]
 }
