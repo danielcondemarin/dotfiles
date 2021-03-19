@@ -15,5 +15,5 @@
     "go.goplsOptions": {
       "gofumpt": true
     },
-    "snippets.ultisnips.directories": [ "gosnippets/UltiSnips" ]
+    "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"]
 }

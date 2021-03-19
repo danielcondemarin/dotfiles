@@ -196,7 +196,6 @@ Plug 'lambdalisue/nerdfont.vim'
 Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'lambdalisue/glyph-palette.vim'
 Plug 'antoinemadec/FixCursorHold.nvim'
-"Plug 'vimwiki/vimwiki'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-rhubarb'
@@ -206,6 +205,7 @@ Plug 'cespare/vim-toml'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'fatih/vim-go'
 Plug 'tpope/vim-commentary'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
