@@ -91,10 +91,6 @@ command Gpp :Gpull | Gpush<CR>
 " tabs
 map <Leader>t :tabnew<CR>
 
-" signify
-nnoremap <leader>gp :SignifyHunkDiff<cr>
-nnoremap <leader>gu :SignifyHunkUndo<cr>
-
 " lsp
 " diagnostics
 nnoremap ]g <cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>
@@ -135,16 +131,14 @@ augroup END
 "
 call plug#begin('~/.vim/plugged')
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'hoob3rt/lualine.nvim'
 Plug 'mileszs/ack.vim'
-Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-surround'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'tpope/vim-fugitive'
 Plug 'joaohkfaria/vim-jest-snippets'
 Plug 'machakann/vim-highlightedyank'
-Plug 'mhinz/vim-signify'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-dispatch'
@@ -165,16 +159,16 @@ Plug 'honza/vim-snippets'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'windwp/nvim-autopairs'
-Plug 'mhartington/oceanic-next'
+Plug 'folke/tokyonight.nvim'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'nvim-lua/plenary.nvim'
 
 call plug#end()
 
 " THEME
 "
 syntax on
-let g:oceanic_next_terminal_bold = 1
-let g:oceanic_next_terminal_italic = 1
-colorscheme OceanicNext
+colorscheme tokyonight
 
 hi Normal guibg=NONE ctermbg=NONE
 hi LineNr guibg=NONE ctermbg=NONE
@@ -198,21 +192,60 @@ imap <expr> <cr>  pumvisible() ? complete_info()["selected"] != "-1" ?
 lua << EOF
   require'nvim-autopairs'.setup()
 EOF
+ 
+
+lua << EOF
+  -- status line
+  require('lualine').setup {
+    options = {
+      theme = 'tokyonight'
+    }
+  }
+
+  -- git signs
+  require('gitsigns').setup {
+    signs = {
+      add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+      change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+      delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+      topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+      changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    },
+    numhl = false,
+    linehl = false,
+    keymaps = {
+      -- Default keymap options
+      noremap = true,
+      buffer = true,
+
+      ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
+      ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
+
+      ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+      ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+      ['n <leader>gu'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+      ['n <leader>gU'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+      ['n <leader>gp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+      ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
+
+      -- Text objects
+      ['o ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
+      ['x ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>'
+    },
+    watch_index = {
+      interval = 1000
+    },
+    current_line_blame = false,
+    sign_priority = 6,
+    update_debounce = 100,
+    status_formatter = nil, -- Use default
+    use_decoration_api = true,
+    use_internal_diff = true,  -- If luajit is present
+  }
+EOF
 
 " LSP
 "
-" Errors in Red
-hi LspDiagnosticsVirtualTextError guifg=Red ctermfg=Red
-" Warnings in Yellow
-hi LspDiagnosticsVirtualTextWarning guifg=Yellow ctermfg=Yellow
-" Info and Hints in White
-hi LspDiagnosticsVirtualTextInformation guifg=White ctermfg=White
-hi LspDiagnosticsVirtualTextHint guifg=White ctermfg=White
-" Underline the offending code
-hi LspDiagnosticsUnderlineError guifg=NONE ctermfg=NONE cterm=underline gui=underline
-hi LspDiagnosticsUnderlineWarning guifg=NONE ctermfg=NONE cterm=underline gui=underline
-hi LspDiagnosticsUnderlineInformation guifg=NONE ctermfg=NONE cterm=underline gui=underline
-hi LspDiagnosticsUnderlineHint guifg=NONE ctermfg=NONE cterm=underline gui=underline
 
 lua << EOF
 local nvim_lsp = require('lspconfig')
@@ -251,17 +284,16 @@ local on_attach = function(client, bufnr)
 
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
-    -- comment for now, doesn't look to good
-    -- vim.api.nvim_exec([[
-    --   hi LspReferenceText guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
-    --   hi LspReferenceRead guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
-    --   hi LspReferenceWrite guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
-    --   augroup lsp_document_highlight
-    --     autocmd! * <buffer>
-    --     autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-    --     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    --   augroup END
-    -- ]], false)
+     vim.api.nvim_exec([[
+       hi LspReferenceText guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
+       hi LspReferenceRead guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
+       hi LspReferenceWrite guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
+       augroup lsp_document_highlight
+         autocmd! * <buffer>
+         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+       augroup END
+     ]], false)
   end
 
   require'completion'.on_attach(client, bufnr)
@@ -324,18 +356,6 @@ let g:highlightedyank_highlight_duration = 250
 "
 command! -nargs=+ Gca :r!git log -n400 --pretty=format:"\%an <\%ae>" | grep -i '<args>' | head -1 | xargs echo "Co-authored-by:"
 
-" AIRLINE
-"
-let g:airline_theme='oceanicnext'
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_splits = 0
-let g:airline#extensions#tabline#show_tabs = 1
-let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#show_close_button = 0
-
 " VIM CLOSETAG
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
@@ -378,8 +398,6 @@ let g:closetag_shortcut = '>'
 "
 "let g:closetag_close_shortcut = '<leader>>'
 
-
 " FERN
 "
 let g:fern#renderer = "nerdfont"
-highlight FernBranchText guifg='#99c794' ctermfg='114'
