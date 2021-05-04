@@ -15,13 +15,6 @@ scrolling:
 font:
   normal:
     family: VictorMono Nerd Font
-    style: Regular
-  bold:
-    family: VictorMono Nerd Font
-    style: Bold
-  italic:
-    family: VictorMono Nerd Font
-    style: Italic
 
   # Point size of the font
   size: 16
