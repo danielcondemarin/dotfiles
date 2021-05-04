@@ -17,9 +17,6 @@ set foldmethod=syntax
 set foldlevelstart=99
 set nowrap
 filetype plugin on
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=100
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
@@ -40,13 +37,6 @@ set wildmenu
 " GLOBAL IGNORE WHEN FINDING FILES
 "
 set wildignore+=**/node_modules/**,**/.git/**
-
-" TAG JUMPING
-" 
-" - Use ^] to jump to tag
-" - Use g^] for ambiguous tags
-" - Use ^t to jump back up the tag stack
-command! MakeTags !ctags -R --exclude=.git --exclude=node_modules .
 
 " MAPPINGS
 "
@@ -90,11 +80,6 @@ command Gpp :Gpull | Gpush<CR>
 
 " tabs
 map <Leader>t :tabnew<CR>
-
-" lsp
-" diagnostics
-nnoremap ]g <cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>
-nnoremap [g <cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>
 
 " fern
 map <leader>n :Fern . -drawer -toggle -reveal=% -width=40<cr>
@@ -162,18 +147,19 @@ Plug 'windwp/nvim-autopairs'
 Plug 'folke/tokyonight.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'folke/lsp-trouble.nvim'
+Plug 'glepnir/dashboard-nvim'
 
 call plug#end()
+
+" Dashboard
+"
+let g:dashboard_default_executive ='fzf'
 
 " THEME
 "
 syntax on
 colorscheme tokyonight
-
-hi Normal guibg=NONE ctermbg=NONE
-hi LineNr guibg=NONE ctermbg=NONE
-hi SignColumn guibg=NONE ctermbg=NONE
-hi EndOfBuffer guibg=NONE ctermbg=NONE
 
 " checks if your terminal has 24-bit color support
 if (has("termguicolors"))
@@ -284,16 +270,16 @@ local on_attach = function(client, bufnr)
 
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
-     vim.api.nvim_exec([[
-       hi LspReferenceText guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
-       hi LspReferenceRead guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
-       hi LspReferenceWrite guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
-       augroup lsp_document_highlight
-         autocmd! * <buffer>
-         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-       augroup END
-     ]], false)
+    -- vim.api.nvim_exec([[
+    --   hi LspReferenceText guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
+    --   hi LspReferenceRead guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
+    --   hi LspReferenceWrite guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
+    --   augroup lsp_document_highlight
+    --     autocmd! * <buffer>
+    --     autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+    --     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+    --   augroup END
+    -- ]], false)
   end
 
   require'completion'.on_attach(client, bufnr)
