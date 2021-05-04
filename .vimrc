@@ -11,13 +11,12 @@ set expandtab
 set relativenumber
 set hlsearch
 set encoding=UTF-8
-set guifont=FuraCode\ Nerd\ Font:h17
+set guifont=VictorMono\ Nerd\ Font:h17
 set cursorline
 set foldmethod=syntax 
 set foldlevelstart=99
 set nowrap
 filetype plugin on
-syntax on
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=100
@@ -148,7 +147,6 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/nerdfont.vim'
@@ -161,14 +159,33 @@ Plug 'tpope/vim-rhubarb'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'alvan/vim-closetag'
 Plug 'cespare/vim-toml'
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'tpope/vim-commentary'
 Plug 'honza/vim-snippets'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'windwp/nvim-autopairs'
+Plug 'mhartington/oceanic-next'
 
 call plug#end()
+
+" THEME
+"
+syntax on
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+colorscheme OceanicNext
+
+hi Normal guibg=NONE ctermbg=NONE
+hi LineNr guibg=NONE ctermbg=NONE
+hi SignColumn guibg=NONE ctermbg=NONE
+hi EndOfBuffer guibg=NONE ctermbg=NONE
+
+" checks if your terminal has 24-bit color support
+if (has("termguicolors"))
+    set termguicolors
+endif
+
 
 " Completion
 "
@@ -234,16 +251,17 @@ local on_attach = function(client, bufnr)
 
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec([[
-      hi LspReferenceText guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
-      hi LspReferenceRead guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
-      hi LspReferenceWrite guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]], false)
+    -- comment for now, doesn't look to good
+    -- vim.api.nvim_exec([[
+    --   hi LspReferenceText guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
+    --   hi LspReferenceRead guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
+    --   hi LspReferenceWrite guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
+    --   augroup lsp_document_highlight
+    --     autocmd! * <buffer>
+    --     autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+    --     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+    --   augroup END
+    -- ]], false)
   end
 
   require'completion'.on_attach(client, bufnr)
@@ -251,7 +269,7 @@ end
 
 -- Use a loop to conveniently both setup defined servers 
 -- and map buffer local keybindings when the language server attaches
-local servers = { "gopls", "rust_analyzer", "tsserver" }
+local servers = { "gopls", "rust_analyzer", "tsserver", "jsonls" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
@@ -308,7 +326,7 @@ command! -nargs=+ Gca :r!git log -n400 --pretty=format:"\%an <\%ae>" | grep -i '
 
 " AIRLINE
 "
-let g:airline_theme='onedark'
+let g:airline_theme='oceanicnext'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
@@ -360,17 +378,8 @@ let g:closetag_shortcut = '>'
 "
 "let g:closetag_close_shortcut = '<leader>>'
 
+
 " FERN
 "
 let g:fern#renderer = "nerdfont"
-
-" THEME
-"
-colorscheme onedark
-
-" Enable true colours in Neovim
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
+highlight FernBranchText guifg='#99c794' ctermfg='114'

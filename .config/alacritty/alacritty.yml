@@ -14,14 +14,7 @@ scrolling:
 # Font Configuration
 font:
   normal:
-    family: JetBrainsMono Nerd Font
-    style: Regular
-  bold:
-    family: JetBrainsMono Nerd Font
-    style: Bold
-  italic:
-    family: JetBrainsMono Nerd Font
-    style: Italic
+    family: VictorMono Nerd Font
 
   # Point size of the font
   size: 16
@@ -30,39 +23,49 @@ cursor:
   style: Block
   unfocused_hollow: true
 
- #Colors (One Dark)
+# Base16 OceanicNext 256 - alacritty color config
+# https://github.com/voronianski/oceanic-next-color-scheme
 colors:
-   #Default colors
+  # Default colors
   primary:
-    foreground: '0xabb2bf'
-    background: '0x282c34'
+    background: '0x1b2b34'
+    foreground: '0xc0c5ce'
 
-   #Cursor colors
+  # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
-    text: '0x5c6370'
-    cursor: '0xabb2bf'
+    text: '0x1b2b34'
+    cursor: '0xc0c5ce'
 
-   #Normal colors
+  # Normal colors
   normal:
-    black:   '0x5c6370'
-    red:     '0xe06c75'
-    green:   '0x98c379'
-    yellow:  '0xe5c07b'
-    blue:    '0x61afef'
-    magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0xabb2bf'
+    black:   '0x1b2b34'
+    red:     '0xec5f67'
+    green:   '0x99c794'
+    yellow:  '0xfac863'
+    blue:    '0x6699cc'
+    magenta: '0xc594c5'
+    cyan:    '0x5fb3b3'
+    white:   '0xc0c5ce'
 
-   #Bright colors
+  # Bright colors
   bright:
-    black:   '0x4b5263'
-    red:     '0xbe5046'
-    green:   '0x98c379'
-    yellow:  '0xd19a66'
-    blue:    '0x61afef'
-    magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0x3e4452'
+    black:   '0x65737e'
+    red:     '0xec5f67'
+    green:   '0x99c794'
+    yellow:  '0xfac863'
+    blue:    '0x6699cc'
+    magenta: '0xc594c5'
+    cyan:    '0x5fb3b3'
+    white:   '0xd8dee9'
+
+  indexed_colors:
+    - { index: 16, color: '0xf99157' }
+    - { index: 17, color: '0xab7967' }
+    - { index: 18, color: '0x343d46' }
+    - { index: 19, color: '0x4f5b66' }
+    - { index: 20, color: '0xa7adba' }
+    - { index: 21, color: '0xcdd3de' }
+
 # Shell
 shell:
   program: /bin/zsh
