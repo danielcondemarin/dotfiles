@@ -148,7 +148,7 @@ Plug 'folke/tokyonight.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'folke/lsp-trouble.nvim'
-Plug 'glepnir/dashboard-nvim'
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 
