@@ -38,15 +38,15 @@ Plug 'mhinz/vim-startify'
 
 call plug#end()
 
-" REMAP LEADER TO SPACE KEY 
-"
-let mapleader = ' '
-
-" THEME
+" Theme
 "
 let g:tokyonight_style = "storm"
 syntax on
 colorscheme tokyonight
+
+" Set leader to space key
+"
+let mapleader = ' '
 
 " Dashboard
 "
@@ -65,12 +65,11 @@ imap <expr> <cr>  pumvisible() ? complete_info()["selected"] != "-1" ?
                  \ "\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>" :  "\<CR>"
 " Autopairs
 "
+lua require'nvim-autopairs'.setup()
+
+" Status line
+"
 lua << EOF
-  require'nvim-autopairs'.setup()
-EOF
- 
-lua << EOF
-  -- status line
   require('lualine').setup {
     options = {
       theme = 'tokyonight'
@@ -82,10 +81,10 @@ EOF
 "
 lua require'nvim-treesitter.configs'.setup { ensure_installed = "maintained", highlight = { enable = true } }
 
-" HIGHLIGHTED YANK
+" Highlighted yanks
 "
 let g:highlightedyank_highlight_duration = 250
 
-" FERN
+" Fern
 "
 let g:fern#renderer = "nerdfont"
