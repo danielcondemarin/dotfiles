@@ -44,6 +44,12 @@ let g:tokyonight_style = "storm"
 syntax on
 colorscheme tokyonight
 
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
 " Set leader to space key
 "
 let mapleader = ' '
@@ -51,11 +57,6 @@ let mapleader = ' '
 " Dashboard
 "
 let g:dashboard_default_executive ='fzf'
-
-" checks if your terminal has 24-bit color support
-if (has("termguicolors"))
-    set termguicolors
-endif
 
 " Completion
 "
