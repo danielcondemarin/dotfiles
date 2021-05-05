@@ -35,6 +35,8 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'folke/lsp-trouble.nvim'
 Plug 'mhinz/vim-startify'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 
 call plug#end()
 
@@ -61,9 +63,9 @@ let g:dashboard_default_executive ='fzf'
 " Completion
 "
 let g:completion_confirm_key = "\<C-y>"
-let g:completion_enable_auto_hover = 0
-imap <expr> <cr>  pumvisible() ? complete_info()["selected"] != "-1" ?
-                 \ "\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>" :  "\<CR>"
+let g:completion_enable_snippet = 'vim-vsnip'
+" let g:completion_enable_auto_hover = 0
+
 " Autopairs
 "
 lua require'nvim-autopairs'.setup()
