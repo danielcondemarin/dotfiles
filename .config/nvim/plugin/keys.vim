@@ -92,6 +92,9 @@ augroup END
 " expand
 imap <expr> <C-y>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-y>'
 smap <expr> <C-y>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-y>'
+" expand or jump
+imap <expr> <C-m>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-m>'
+smap <expr> <C-m>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-m>'
 " jump forward or backward
 imap <expr> <C-j>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-j>'
 smap <expr> <C-j>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-j>'

@@ -58,7 +58,7 @@ lua << EOF
   -- and map buffer local keybindings when the language server attaches
   local servers = { "gopls", "rust_analyzer", "tsserver", "jsonls", "html" }
   for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup { on_attach = on_attach, capabilities = capabilities }
+    nvim_lsp[lsp].setup { on_attach = on_attach, capabilities = capabilities, init_options = { usePlaceholders = true, completeUnimported = true } }
   end
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
