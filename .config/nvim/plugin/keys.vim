@@ -100,6 +100,7 @@ imap <expr> <C-l>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-l
 smap <expr> <C-l>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-l>'
 imap <expr> <C-h>   vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-h>'
 smap <expr> <C-h>   vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-h>'
+
 " select or cut text to use as $tm_selected_text in the next snippet.
 " see https://github.com/hrsh7th/vim-vsnip/pull/50
 " nmap        s   <Plug>(vsnip-select-text)

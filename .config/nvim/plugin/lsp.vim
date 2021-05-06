@@ -1,5 +1,5 @@
 lua << EOF
-  local nvim_lsp = require('lspconfig')
+  local nvim_lsp = require'lspconfig'
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true;
@@ -14,13 +14,13 @@ lua << EOF
     local opts = { noremap=true, silent=true }
     buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
     buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
     buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
@@ -50,7 +50,7 @@ lua << EOF
       --   augroup END
       -- ]], false)
     end
-
+ 
     require'completion'.on_attach(client, bufnr)
   end
 
@@ -84,3 +84,9 @@ lua << EOF
     }
   )
 EOF
+
+" Signs
+call sign_define('LspDiagnosticsSignError',       { 'text': '',       'texthl': 'LspDiagnosticsSignError'       })
+call sign_define('LspDiagnosticsSignWarning',     { 'text': '',       'texthl': 'LspDiagnosticsSignWarning'     })
+call sign_define('LspDiagnosticsSignInformation', { 'text': '', 'texthl': 'LspDiagnosticsSignInformation' })
+call sign_define('LspDiagnosticsSignHint',        { 'text': '',        'texthl': 'LspDiagnosticsSignHint'        })
