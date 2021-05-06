@@ -37,6 +37,7 @@ Plug 'folke/lsp-trouble.nvim'
 Plug 'mhinz/vim-startify'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'golang/vscode-go'
 
 call plug#end()
 

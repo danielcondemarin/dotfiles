@@ -86,7 +86,9 @@ lua << EOF
 EOF
 
 " Signs
+" remove signs so UI is not cluttered. Virtual text on the right hand side is
+" enough
 call sign_define('LspDiagnosticsSignError',       { 'text': '',       'texthl': 'LspDiagnosticsSignError'       })
 call sign_define('LspDiagnosticsSignWarning',     { 'text': '',       'texthl': 'LspDiagnosticsSignWarning'     })
-call sign_define('LspDiagnosticsSignInformation', { 'text': '', 'texthl': 'LspDiagnosticsSignInformation' })
-call sign_define('LspDiagnosticsSignHint',        { 'text': '',        'texthl': 'LspDiagnosticsSignHint'        })
+call sign_define('LspDiagnosticsSignInformation', { 'text': '',       'texthl': 'LspDiagnosticsSignInformation' })
+call sign_define('LspDiagnosticsSignHint',        { 'text': '',       'texthl': 'LspDiagnosticsSignHint'        })
