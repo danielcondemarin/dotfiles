@@ -57,8 +57,22 @@ lua << EOF
   -- Use a loop to conveniently both setup defined servers 
   -- and map buffer local keybindings when the language server attaches
   local servers = { "gopls", "rust_analyzer", "tsserver", "jsonls", "html" }
+  local settings = nil
+
   for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup { on_attach = on_attach, capabilities = capabilities, init_options = { usePlaceholders = true, completeUnimported = true } }
+    if lsp == 'gopls' then
+      settings = {
+        gopls = {
+          analyses = {
+            unusedparams = true,
+          },
+          gofumpt = true,
+          staticcheck = true
+        }
+      }
+    end
+
+    nvim_lsp[lsp].setup { on_attach = on_attach, settings = settings, capabilities = capabilities, init_options = { usePlaceholders = true, completeUnimported = true } }
   end
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -68,7 +82,9 @@ lua << EOF
       -- Enable virtual text, override spacing to 4
       virtual_text = {
         spacing = 4,
-        prefix = '●'
+        prefix = '●',
+        update_in_insert = false,
+        signs = false
       },
       -- Use a function to dynamically turn signs off
       -- and on, using buffer local variables
@@ -85,10 +101,4 @@ lua << EOF
   )
 EOF
 
-" Signs
-" remove signs so UI is not cluttered. Virtual text on the right hand side is
-" enough
-call sign_define('LspDiagnosticsSignError',       { 'text': '',       'texthl': 'LspDiagnosticsSignError'       })
-call sign_define('LspDiagnosticsSignWarning',     { 'text': '',       'texthl': 'LspDiagnosticsSignWarning'     })
-call sign_define('LspDiagnosticsSignInformation', { 'text': '',       'texthl': 'LspDiagnosticsSignInformation' })
-call sign_define('LspDiagnosticsSignHint',        { 'text': '',       'texthl': 'LspDiagnosticsSignHint'        })
+autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
