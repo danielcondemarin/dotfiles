@@ -21,6 +21,9 @@ fi
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^N' autosuggest-accept
 
+# go language server
+export PATH="$(go env GOPATH)/bin:$PATH"
+
 # No need to slow down startup if nvm not used frequently
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

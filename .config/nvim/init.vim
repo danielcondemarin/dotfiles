@@ -130,3 +130,4 @@ require'diffview'.setup {
   }
 }
 EOF
+
