@@ -19,9 +19,8 @@ Plug 'lambdalisue/fern-renderer-nerdfont.vim'
 Plug 'lambdalisue/glyph-palette.vim'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-rhubarb'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'alvan/vim-closetag'
 Plug 'cespare/vim-toml'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
@@ -39,6 +38,9 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'sindrets/diffview.nvim'
+Plug 'sebdah/vim-delve'
+Plug 'szw/vim-maximizer'
+Plug 'puremourning/vimspector'
 
 call plug#end()
 
@@ -130,4 +132,3 @@ require'diffview'.setup {
   }
 }
 EOF
-

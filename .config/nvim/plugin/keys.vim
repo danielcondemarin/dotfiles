@@ -101,6 +101,36 @@ smap <expr> <C-l>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-l
 imap <expr> <C-h>   vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-h>'
 smap <expr> <C-h>   vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-h>'
 
+" Debugging
+" vimspector
+
+fun GotoWindow(id)
+  call win_gotoid(a:id)
+  MaximizerToggle
+endfun
+
+nnoremap <leader>m :MaximizerToggle!<CR>
+nnoremap <leader>dd :call vimspector#Launch()<CR>
+nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
+nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
+nnoremap <leader>de :call vimspector#Reset()<CR>
+
+nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
+
+nmap <leader>dl <Plug>VimspectorStepInto
+nmap <leader>dj <Plug>VimspectorStepOver
+nmap <leader>dk <Plug>VimspectorStepOut
+nmap <leader>d_ <Plug>VimspectorRestart
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+
+nmap <leader>drc <Plug>VimspectorRunToCursor
+nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
+nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
+
 " select or cut text to use as $tm_selected_text in the next snippet.
 " see https://github.com/hrsh7th/vim-vsnip/pull/50
 " nmap        s   <Plug>(vsnip-select-text)

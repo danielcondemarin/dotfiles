@@ -56,7 +56,7 @@ lua << EOF
 
   -- Use a loop to conveniently both setup defined servers 
   -- and map buffer local keybindings when the language server attaches
-  local servers = { "gopls", "rust_analyzer", "tsserver", "jsonls", "html" }
+  local servers = { "gopls", "rust_analyzer", "solargraph", "tsserver", "jsonls", "html" }
   local settings = nil
 
   for _, lsp in ipairs(servers) do
