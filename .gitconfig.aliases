@@ -1,0 +1,8 @@
+[alias]
+    nb = "!f() { git checkout -b ( origin/master; git branch --set-upstream-to origin/master; }; f"
+    s = status -s
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+    co = checkout
+    ll = log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat
+    cm = commit -m
+    unstage = reset HEAD --)
