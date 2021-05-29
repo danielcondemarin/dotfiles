@@ -22,8 +22,6 @@ fi
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^N' autosuggest-accept
 
-export PATH="/Applications/Postgres.app/Contents/Versions/9.6/bin:$PATH"
-
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
