@@ -27,7 +27,7 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'tpope/vim-commentary'
 Plug 'honza/vim-snippets'
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/nvim-compe'
 Plug 'windwp/nvim-autopairs'
 Plug 'folke/tokyonight.nvim'
 Plug 'lewis6991/gitsigns.nvim'
@@ -41,6 +41,8 @@ Plug 'sindrets/diffview.nvim'
 Plug 'sebdah/vim-delve'
 Plug 'szw/vim-maximizer'
 Plug 'puremourning/vimspector'
+Plug 'mattn/vim-goimports'
+Plug 'vim-test/vim-test'
 
 call plug#end()
 
@@ -132,3 +134,11 @@ require'diffview'.setup {
   }
 }
 EOF
+
+" goimports
+" enable auto format when write (default)
+let g:goimports = 1
+
+" vim-test
+let test#strategy = "neovim"
+

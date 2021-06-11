@@ -131,9 +131,16 @@ nmap <leader>drc <Plug>VimspectorRunToCursor
 nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
 nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 
-" select or cut text to use as $tm_selected_text in the next snippet.
-" see https://github.com/hrsh7th/vim-vsnip/pull/50
-" nmap        s   <Plug>(vsnip-select-text)
-" xmap        s   <Plug>(vsnip-select-text)
-" nmap        S   <Plug>(vsnip-cut-text)
-" xmap        S   <Plug>(vsnip-cut-text)
+" lsp completion
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <C-y>     compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+" these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>

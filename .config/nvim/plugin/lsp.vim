@@ -1,9 +1,6 @@
 lua << EOF
   local nvim_lsp = require'lspconfig'
 
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true;
-
   local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -36,22 +33,6 @@ lua << EOF
     if client.resolved_capabilities.document_range_formatting then
       buf_set_keymap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
     end
-
-    -- Set autocommands conditional on server_capabilities
-    if client.resolved_capabilities.document_highlight then
-      -- vim.api.nvim_exec([[
-      --   hi LspReferenceText guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
-      --   hi LspReferenceRead guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
-      --   hi LspReferenceWrite guifg=NONE guibg=#444444 guisp=NONE gui=bold,italic cterm=bold,italic
-      --   augroup lsp_document_highlight
-      --     autocmd! * <buffer>
-      --     autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-      --     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      --   augroup END
-      -- ]], false)
-    end
- 
-    require'completion'.on_attach(client, bufnr)
   end
 
   -- Use a loop to conveniently both setup defined servers 
@@ -66,26 +47,29 @@ lua << EOF
           analyses = {
             unusedparams = true,
           },
-          gofumpt = true,
           staticcheck = true
         }
       }
     end
+ 
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.completion.completionItem.resolveSupport = {
+      properties = {
+        'documentation',
+        'detail',
+        'additionalTextEdits',
+        }
+      }
 
-    nvim_lsp[lsp].setup { on_attach = on_attach, settings = settings, capabilities = capabilities, init_options = { usePlaceholders = true, completeUnimported = true } }
+    nvim_lsp[lsp].setup { on_attach = on_attach, capabilities = capabilities, settings = settings }
   end
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
       -- Enable underline, use default values
       underline = true,
-      -- Enable virtual text, override spacing to 4
-      virtual_text = {
-        spacing = 4,
-        prefix = '●',
-        update_in_insert = false,
-        signs = false
-      },
+      virtual_text = false,
       -- Use a function to dynamically turn signs off
       -- and on, using buffer local variables
       signs = function(bufnr, client_id)
@@ -99,6 +83,33 @@ lua << EOF
       end,
     }
   )
+
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = true;
+
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    vsnip = true;
+    ultisnips = true;
+  };
+}
 EOF
 
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+
+
+" autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
