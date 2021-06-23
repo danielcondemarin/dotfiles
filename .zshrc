@@ -9,6 +9,8 @@ prompt pure
 
 # aliases
 alias vim='nvim'
+alias vi='nvim'
+alias v='nvim'
 alias dotf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias dotfiles='dotf'
 alias cdgo='cd $(go env GOPATH)'
