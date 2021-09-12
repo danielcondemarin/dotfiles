@@ -1,7 +1,14 @@
+# comment out for profiling
+# zmodload zsh/zprof
+
 # enable vi mode
 bindkey -v
 # enable reverse search
 bindkey '^R' history-incremental-search-backward
+
+# auto-completions
+autoload -Uz compinit
+compinit
 
 # set custom prompt
 autoload -U promptinit; promptinit
@@ -25,11 +32,15 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^N' autosuggest-accept
 
 # nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# Only enable when absolutely needed. Will slow down zshrc boot considerably!
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # source local configuration
 LOCALRC="$HOME/.localrc"
 if [ -e "$LOCALRC" ]; then 
   source $LOCALRC
 fi
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform

@@ -43,6 +43,7 @@ Plug 'szw/vim-maximizer'
 Plug 'puremourning/vimspector'
 Plug 'mattn/vim-goimports'
 Plug 'vim-test/vim-test'
+Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
@@ -141,4 +142,3 @@ let g:goimports = 1
 
 " vim-test
 let test#strategy = "neovim"
-

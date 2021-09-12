@@ -1,3 +1,6 @@
+" Behave VIM
+nnoremap Y y$
+
 " search and replace
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 nnoremap <Leader>F :Ack! -F "" <Left><Left>
@@ -130,6 +133,10 @@ nnoremap <leader>d<space> :call vimspector#Continue()<CR>
 nmap <leader>drc <Plug>VimspectorRunToCursor
 nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
 nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
 
 " lsp completion
 inoremap <silent><expr> <C-Space> compe#complete()
@@ -144,3 +151,9 @@ nmap <silent> t<C-f> :TestFile<CR>
 nmap <silent> t<C-s> :TestSuite<CR>
 nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
+function! DebugNearest()
+  let g:test#go#runner = 'delve'
+  TestNearest
+  unlet g:test#go#runner
+endfunction
+nmap <silent> t<C-d> :call DebugNearest()<CR>
