@@ -21,6 +21,7 @@ alias v='nvim'
 alias dotf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias dotfiles='dotf'
 alias cdgo='cd $(go env GOPATH)'
+alias whoisonport='sudo lsof -i -P | grep LISTEN | grep '
 
 # open tmux on startup
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
@@ -43,4 +44,9 @@ if [ -e "$LOCALRC" ]; then
 fi
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
+# complete -o nospace -C /usr/local/bin/terraform terraform
+
+# override vimdiff to use neovim
+alias vimdiff="nvim -d"
+
+export PATH=$PATH:/usr/local/go/bin
