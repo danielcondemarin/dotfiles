@@ -34,8 +34,8 @@ bindkey '^N' autosuggest-accept
 
 # nvm
 # Only enable when absolutely needed. Will slow down zshrc boot considerably!
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # source local configuration
 LOCALRC="$HOME/.localrc"
@@ -44,9 +44,17 @@ if [ -e "$LOCALRC" ]; then
 fi
 
 autoload -U +X bashcompinit && bashcompinit
-# complete -o nospace -C /usr/local/bin/terraform terraform
+complete -o nospace -C /usr/local/bin/terraform terraform
 
 # override vimdiff to use neovim
 alias vimdiff="nvim -d"
 
 export PATH=$PATH:/usr/local/go/bin
+
+# add antlr to classpath
+export CLASSPATH=".:/usr/local/lib/antlr-4.11.1-complete.jar:$CLASSPATH"
+alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr-4.11.1-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
+alias grun='java -Xmx500M -cp "/usr/local/lib/antlr-4.11.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
+
+# Make zsh copy/paste fast
+DISABLE_MAGIC_FUNCTIONS=true
