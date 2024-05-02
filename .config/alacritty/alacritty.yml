@@ -6,7 +6,7 @@ window:
   padding:
     x: 10
     y: 10
-  decorations: none
+  decorations: buttonless
 scrolling:
   history: 10000
   multiplier: 3
@@ -14,7 +14,7 @@ scrolling:
 # Font Configuration
 font:
   normal:
-    family: VictorMono Nerd Font
+    family: VictorMono NFM
 
   # Point size of the font
   size: 16

@@ -11,6 +11,7 @@ autoload -Uz compinit
 compinit
 
 # set custom prompt
+fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
 
@@ -23,13 +24,9 @@ alias dotfiles='dotf'
 alias cdgo='cd $(go env GOPATH)'
 alias whoisonport='sudo lsof -i -P | grep LISTEN | grep '
 
-# open tmux on startup
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
-fi
 
 # autosuggestions
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^N' autosuggest-accept
 
 # nvm
@@ -37,11 +34,6 @@ bindkey '^N' autosuggest-accept
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# source local configuration
-LOCALRC="$HOME/.localrc"
-if [ -e "$LOCALRC" ]; then 
-  source $LOCALRC
-fi
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
@@ -58,3 +50,18 @@ alias grun='java -Xmx500M -cp "/usr/local/lib/antlr-4.11.1-complete.jar:$CLASSPA
 
 # Make zsh copy/paste fast
 DISABLE_MAGIC_FUNCTIONS=true
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# source local configuration
+LOCALRC="$HOME/.localrc"
+if [ -e "$LOCALRC" ]; then 
+  source $LOCALRC
+fi
+
+# open tmux on startup
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+ 
+export PATH="$PATH:/Users/danielconde/Downloads/protoc-25.3-osx-aarch_64/bin"
