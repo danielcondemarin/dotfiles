@@ -11,7 +11,7 @@ autoload -Uz compinit
 compinit
 
 # set custom prompt
-fpath+=/opt/homebrew/share/zsh/site-functions
+fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
 
@@ -26,7 +26,7 @@ alias whoisonport='sudo lsof -i -P | grep LISTEN | grep '
 
 
 # autosuggestions
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^N' autosuggest-accept
 
 # nvm
@@ -50,7 +50,7 @@ alias grun='java -Xmx500M -cp "/usr/local/lib/antlr-4.11.1-complete.jar:$CLASSPA
 
 # Make zsh copy/paste fast
 DISABLE_MAGIC_FUNCTIONS=true
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # source local configuration
 LOCALRC="$HOME/.localrc"
