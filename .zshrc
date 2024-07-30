@@ -15,19 +15,24 @@ fpath+=($HOME/.zsh/pure)
 autoload -U promptinit; promptinit
 prompt pure
 
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
+export GO111MODULE=on
+
 # aliases
 alias vim='nvim'
 alias vi='nvim'
-alias v='nvim'
 alias dotf='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias dotfiles='dotf'
 alias cdgo='cd $(go env GOPATH)'
 alias whoisonport='sudo lsof -i -P | grep LISTEN | grep '
-
+alias got="go test"
+alias gotv="go test -v"
+alias so="source"
 
 # autosuggestions
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-bindkey '^N' autosuggest-accept
+# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# bindkey '^N' autosuggest-accept
 
 # nvm
 # Only enable when absolutely needed. Will slow down zshrc boot considerably!
@@ -65,3 +70,4 @@ fi
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
  
 export PATH="$PATH:/Users/danielconde/Downloads/protoc-25.3-osx-aarch_64/bin"
+source /home/ubuntu/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
