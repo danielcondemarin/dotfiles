@@ -71,3 +71,4 @@ fi
  
 export PATH="$PATH:/Users/danielconde/Downloads/protoc-25.3-osx-aarch_64/bin"
 source /home/ubuntu/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+eval "$(direnv hook zsh)"

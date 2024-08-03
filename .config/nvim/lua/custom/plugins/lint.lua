@@ -8,7 +8,7 @@ return {
         markdown = { 'markdownlint' },
         json = { 'jsonlint' },
         dockerfile = { 'hadolint' },
-        go = { 'golangci-lint' },
+        go = { 'golangcilint' },
         typescript = { 'eslint_d' },
         typescriptreact = { 'eslint_d' },
         javascript = { 'eslint_d' },
