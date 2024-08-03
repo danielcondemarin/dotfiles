@@ -31,8 +31,8 @@ alias gotv="go test -v"
 alias so="source"
 
 # autosuggestions
-# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-# bindkey '^N' autosuggest-accept
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^N' autosuggest-accept
 
 # nvm
 # Only enable when absolutely needed. Will slow down zshrc boot considerably!
