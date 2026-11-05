@@ -1,0 +1,14 @@
+name: CI Gate Demo
+
+on:
+  pull_request:
+    branches:
+      - ci-gate-demo-base
+
+jobs:
+  fail-intentionally:
+    name: dummy-failing-check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail intentionally
+        run: exit 1
